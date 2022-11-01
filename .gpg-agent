@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+if [ -e ~/.gnupg/S.gpg-agent ]
+then
+	exit
+else
+	pkill gpg-agent
+	rm -f ~/.gpg-agent.env
+fi
+
+env=`gpg-agent --daemon`
+if [ $?==0 ]
+then
+	echo "$env" > ~/.gpg-agent.env
+fi
